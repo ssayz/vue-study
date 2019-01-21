@@ -19,13 +19,14 @@
     </div>
 
     <script>
-        new Vue({
+        let vm = new Vue({
             el:".app",
             data:{
-                msg:"跑呀跑啊抛压泡啊"
+                msg:"跑呀跑啊抛压泡啊",
+                timerId:null
             },
             methods:{
-                kais(){
+                kais(){dqerewq          
                     clearInterval(this.timerId)
                     this.timerId = setInterval(()=>{
                         let head = this.msg.substr(0,1)
@@ -36,7 +37,6 @@
                 stop(){
                     clearInterval(this.timerId)
                 }
-
             }
         })
     </script>
