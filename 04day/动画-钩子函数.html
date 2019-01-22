@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .ball{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <input type="button" value="点击" @click="flag=!flag">
+        
+        <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter">
+            
+            <div class="ball" v-if="flag"></div>
+
+        </transition>
+
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el:'.app',
+            data:{
+                flag:false
+            },
+            methods:{
+                beforeEnter(el){
+                    //表示入场之前，动画尚未开始，设置元素开始动画之前的起始位置
+                    el.style.transform="translate(0,0)"
+                },
+                enter(el,done){
+                    //必须要写
+                    el.offsetWidth
+
+                    //表示动画开始之后的样子，可以设置元素动画之后的样子
+                    el.style.transform="translate(150px,450px)"
+                    el.style.transition="all 1s ease"
+
+                    //这里的done就是afterEnter这个函数的引用
+                    done()
+                },
+                afterEnter(el){
+                    //动画完成之后会调用这个方法
+                    this.flag=!this.flag
+                },
+            }
+        })
+    </script>
+</body>
+</html>
